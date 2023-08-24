@@ -1,0 +1,74 @@
+Excel Data Manipulation and Charting Script Documentation
+-------------------------------------------------------
+
+This Python script demonstrates how to manipulate Excel data, perform calculations, and create a bar chart using the `openpyxl` library. It reads data from an Excel file, calculates corrected prices, adds a header, and generates a bar chart representing the corrected prices.
+
+Usage
+-----
+1. Ensure you have Python and the `openpyxl` library installed.
+2. Place the script in the same directory as an Excel file named 'transactions.xlsx' (adjust the filename if needed).
+3. Run the script. It will read the data from 'transactions.xlsx', perform calculations, generate a bar chart, and save results to 'transaction2.xlsx'.
+
+Code Overview
+-------------
+1. Import necessary libraries:
+   - `openpyxl`: Used for working with Excel files.
+   - `BarChart`, `Reference`: Specific classes for creating a bar chart and referencing Excel data.
+
+2. Load the Excel workbook:
+   - Use `xl.load_workbook('transactions.xlsx')` to load the 'transactions.xlsx' workbook.
+
+3. Access the worksheet:
+   - Retrieve the 'Sheet1' worksheet using `wb['Sheet1']`.
+
+4. Iterate through rows for data manipulation:
+   - Use a `for` loop to iterate through rows starting from the 2nd row (skipping header row) up to the maximum row count (`sheet.max_row`).
+   - Retrieve the cell value from the 3rd column (index 2) in the current row using `sheet.cell(row, 3)`.
+
+5. Perform calculations:
+   - Calculate the corrected price by reducing the value by 10% (`cell.value * 0.9`).
+
+6. Update the corrected price column:
+   - Set the calculated corrected price value to the cell in the 4th column (index 3) for the current row using `sheet.cell(row, 4).value = corrected_price`.
+
+7. Update the header for the corrected price column:
+   - Set the value of cell 'D1' to 'corrected_price' using `sheet['d1'].value = 'corrected_price'`.
+
+8. Create a reference for the bar chart data:
+   - Use `Reference` to define the data range for the chart.
+
+9. Create a bar chart:
+   - Initialize a `BarChart` object.
+   - Add the data values to the chart using the reference created earlier.
+
+10. Add the chart to the worksheet:
+    - Use `sheet.add_chart(chart, 'e2')` to place the chart starting from cell 'E2'.
+
+11. Save the modified workbook:
+    - Save the changes, including the added chart, to a new Excel file named 'transaction2.xlsx' using `wb.save('transaction2.xlsx')`.
+
+Components
+----------
+- `wb`: The Excel workbook loaded from 'transactions.xlsx'.
+- `sheet`: The 'Sheet1' worksheet within the workbook.
+- `cell`: A cell containing data from the 3rd column (index 2) of the current row.
+- `corrected_price`: The calculated value after reducing the original price by 10%.
+- `corrected_price_cell`: A cell in the 4th column (index 3) where the corrected price will be written.
+- `values`: A reference to the corrected price values to be used in the chart.
+- `chart`: A `BarChart` object for creating the bar chart.
+
+Functionality
+-------------
+The script reads data from an Excel file, calculates corrected prices, updates the Excel file with new values, generates a bar chart using the corrected prices, and saves the results to 'transaction2.xlsx'.
+
+License
+-------
+This script is provided without any warranty. You are free to use and modify it for personal or educational purposes.
+
+Author
+------
+[Shivam Rawat]
+
+Date
+----
+[24-08-2023]
